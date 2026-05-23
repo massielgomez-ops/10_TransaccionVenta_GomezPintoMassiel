@@ -1,0 +1,109 @@
+<section class="venta-shell">
+  <div class="hero-card">
+    <div>
+      <p class="eyebrow">Transacción de venta</p>
+      <h1>Registrar venta</h1>
+      <p class="subtitle">Seleccione el cliente, agregue productos dinámicamente y envíe la venta al back-end.</p>
+    </div>
+    <div class="summary-stack">
+      <div class="summary-box accent">
+        <span>Total general</span>
+        <strong>{{ totalGeneral | number:'1.2-2' }}</strong>
+      </div>
+      <div class="summary-box muted">
+        <span>Productos agregados</span>
+        <strong>{{ items.length }}</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="feedback success" *ngIf="message">{{ message }}</div>
+  <div class="feedback error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <form [formGroup]="ventaForm" (ngSubmit)="saveSale()" class="venta-grid">
+    <div class="card form-card">
+      <div class="form-section">
+        <h3>Datos de la venta</h3>
+        <div class="form-grid">
+          <label>
+            Cliente
+            <select formControlName="clientId">
+              <option [ngValue]="null">Seleccione un cliente</option>
+              <option *ngFor="let customer of customers" [ngValue]="customer.id">{{ customer.name }}</option>
+            </select>
+          </label>
+
+          <label>
+            Fecha de venta
+            <input type="date" formControlName="saleDate">
+          </label>
+        </div>
+      </div>
+
+      <div class="actions-bar">
+        <div>
+          <h3>Productos</h3>
+          <p>Agregue una o varias líneas para completar la venta.</p>
+        </div>
+        <button type="button" class="secondary" (click)="addItem()">+ Agregar producto</button>
+      </div>
+
+      <div formArrayName="items" class="items-list">
+        <div *ngFor="let item of items.controls; let i = index; trackBy: trackByIndex" [formGroupName]="i" class="item-row">
+          <div class="field wide">
+            <label>Producto</label>
+            <select formControlName="productId" (change)="onProductChange(i)">
+              <option [ngValue]="null">Seleccione</option>
+              <option *ngFor="let product of products" [ngValue]="product.id">
+                {{ product.name }} - Stock {{ product.stock }}
+              </option>
+            </select>
+          </div>
+
+          <div class="field compact">
+            <label>Cantidad</label>
+            <input type="number" formControlName="quantity" min="1" (input)="onQuantityChange(i)">
+            <small class="row-error" *ngIf="getRowError(i)">{{ getRowError(i) }}</small>
+          </div>
+
+          <div class="field compact">
+            <label>Precio</label>
+            <input type="text" formControlName="unitPrice" readonly>
+          </div>
+
+          <div class="field compact">
+            <label>Subtotal</label>
+            <input type="text" formControlName="subtotal" readonly>
+          </div>
+
+          <button type="button" class="danger" (click)="removeItem(i)">Eliminar</button>
+        </div>
+      </div>
+
+      <div class="footer-actions">
+        <button type="submit" class="primary">Registrar venta</button>
+      </div>
+    </div>
+
+    <aside class="card info-card">
+      <div class="info-block">
+        <h3>Validaciones</h3>
+        <ul>
+          <li>Cliente obligatorio.</li>
+          <li>Productos obligatorios.</li>
+          <li>Cantidades mayores a cero.</li>
+          <li>Validación de stock antes de enviar.</li>
+          <li>Evita registros vacíos.</li>
+        </ul>
+      </div>
+
+      <div class="info-block">
+        <h3>Resumen técnico</h3>
+        <p>Los datos se preparan antes de enviarse al back-end para mantener la venta consistente.</p>
+      </div>
+
+      <h3>Datos enviados</h3>
+      <pre>{{ ventaForm.value | json }}</pre>
+    </aside>
+  </form>
+</section>

@@ -1,0 +1,268 @@
+.venta-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+  color: #14213d;
+}
+
+.hero-card,
+.card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(20, 33, 61, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(20, 33, 61, 0.08);
+}
+
+.hero-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #fefae0, #fff);
+}
+
+.summary-stack {
+  display: grid;
+  gap: 0.8rem;
+  min-width: 220px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: #8d6e63;
+  margin: 0 0 0.35rem;
+}
+
+.hero-card h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.subtitle {
+  margin: 0.5rem 0 0;
+  max-width: 640px;
+  color: #5f6b7a;
+}
+
+.summary-box {
+  text-align: right;
+  padding: 1rem 1.2rem;
+  border-radius: 18px;
+  color: #fff;
+}
+
+.summary-box.accent {
+  background: linear-gradient(135deg, #14213d, #334155);
+}
+
+.summary-box.muted {
+  background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+}
+
+.summary-box span,
+.total-inline {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.summary-box strong {
+  font-size: 2rem;
+}
+
+.feedback {
+  margin: 1rem 0;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  font-weight: 600;
+}
+
+.feedback.success {
+  background: #e8f5e9;
+  color: #1b5e20;
+}
+
+.feedback.error {
+  background: #ffebee;
+  color: #b71c1c;
+}
+
+.venta-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 1rem;
+}
+
+.card {
+  padding: 1.25rem;
+}
+
+.form-section {
+  margin-bottom: 1.1rem;
+}
+
+.form-section h3,
+.info-block h3,
+.actions-bar h3 {
+  margin: 0 0 0.35rem;
+}
+
+.form-section p,
+.actions-bar p,
+.info-block p {
+  margin: 0;
+  color: #5f6b7a;
+  font-size: 0.92rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 0.9rem;
+}
+
+.form-card label,
+.item-row label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.form-card select,
+.form-card input,
+.item-row select,
+.item-row input {
+  width: 100%;
+  border: 1px solid rgba(20, 33, 61, 0.15);
+  border-radius: 12px;
+  padding: 0.78rem 0.9rem;
+  background: #fff;
+}
+
+.actions-bar,
+.footer-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.items-list {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.item-row {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr 1fr 1fr auto;
+  gap: 0.8rem;
+  align-items: end;
+  padding: 1rem;
+  border-radius: 18px;
+  background: #f8fafc;
+}
+
+.field.wide,
+.field.compact {
+  min-width: 0;
+}
+
+.danger,
+.primary,
+.secondary {
+  border: none;
+  border-radius: 999px;
+  padding: 0.8rem 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary {
+  background: #14213d;
+  color: #fff;
+}
+
+.secondary {
+  background: #f3f4f6;
+  color: #14213d;
+}
+
+.danger {
+  background: #ffe3e3;
+  color: #b71c1c;
+}
+
+.row-error {
+  display: block;
+  margin-top: 0.35rem;
+  color: #b71c1c;
+}
+
+.info-card ul {
+  padding-left: 1.1rem;
+  color: #344054;
+}
+
+.info-block {
+  margin-bottom: 1.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(20, 33, 61, 0.08);
+}
+
+.info-block:last-of-type {
+  margin-bottom: 1rem;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.total-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.total-inline span {
+  font-size: 0.85rem;
+  color: #5f6b7a;
+}
+
+.total-inline strong {
+  font-size: 1.55rem;
+  color: #14213d;
+}
+
+.info-card pre {
+  overflow: auto;
+  padding: 1rem;
+  border-radius: 16px;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 960px) {
+  .venta-grid,
+  .hero-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-grid,
+  .item-row {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-box {
+    text-align: left;
+  }
+
+  .summary-stack {
+    min-width: 0;
+  }
+}

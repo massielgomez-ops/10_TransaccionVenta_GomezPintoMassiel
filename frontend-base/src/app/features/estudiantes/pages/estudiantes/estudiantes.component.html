@@ -1,0 +1,427 @@
+<h2 class="titulo"> Gestion de Estudiantes </h2>
+
+
+<div class="container">
+
+  <!-- FORMULARIO -->
+  <div class="formulario">
+
+    <h3>
+      {{
+        editando
+          ? 'Editar Estudiante'
+          : 'Registrar Estudiante'
+      }}
+    </h3>
+
+    <form
+      [formGroup]="estudianteForm"
+      (ngSubmit)="guardarEstudiante()">
+
+      <div class="form-summary">
+        <small>Estado del formulario: {{ estudianteForm.status }}</small>
+      </div>
+
+      <!-- PASO 1 -->
+      <div *ngIf="paso === 1">
+
+        <div class="doble">
+
+          <div>
+            <label>Nombre</label>
+
+            <input
+              id="nombre"
+              type="text"
+              placeholder="Ingrese nombre"
+              formControlName="nombre"
+              [attr.aria-invalid]="isInvalid('nombre')"
+              [attr.aria-describedby]="isInvalid('nombre') ? 'error-nombre' : null"
+              [class.invalid]="isInvalid('nombre')"
+              [class.valid]="isValid('nombre')">
+
+            <div id="error-nombre" class="error" *ngIf="isInvalid('nombre')">{{ getErrorMessage('nombre') }}</div>
+            
+          </div>
+
+          <div>
+            <label>Apellido</label>
+
+            <input
+              id="apellido"
+              type="text"
+              placeholder="Ingrese apellido"
+              formControlName="apellido"
+              [attr.aria-invalid]="isInvalid('apellido')"
+              [attr.aria-describedby]="isInvalid('apellido') ? 'error-apellido' : null"
+              [class.invalid]="isInvalid('apellido')"
+              [class.valid]="isValid('apellido')">
+
+            <div id="error-apellido" class="error" *ngIf="isInvalid('apellido')">{{ getErrorMessage('apellido') }}</div>
+            
+          </div>
+
+        </div>
+
+        <div class="doble">
+
+          <div>
+            <label>Correo</label>
+
+            <input
+              id="correo"
+              type="email"
+              placeholder="Ingrese correo"
+              formControlName="correo"
+              [attr.aria-invalid]="isInvalid('correo')"
+              [attr.aria-describedby]="isInvalid('correo') ? 'error-correo' : null"
+              [class.invalid]="isInvalid('correo')"
+              [class.valid]="isValid('correo')">
+
+            <div id="error-correo" class="error" *ngIf="isInvalid('correo')">{{ getErrorMessage('correo') }}</div>
+            
+          </div>
+
+          <div>
+            <label>Teléfono</label>
+
+            <input
+              id="telefono"
+              type="tel"
+              inputmode="numeric"
+              placeholder="Ingrese teléfono (9 dígitos, comienza con 9)"
+              formControlName="telefono"
+              maxlength="9"
+              minlength="9"
+              (input)="onTelefonoInput($event)"
+              [attr.aria-invalid]="isInvalid('telefono')"
+              [attr.aria-describedby]="isInvalid('telefono') ? 'error-telefono' : null"
+              [class.invalid]="isInvalid('telefono')"
+              [class.valid]="isValid('telefono')">
+
+            <div id="error-telefono" class="error" *ngIf="isInvalid('telefono')">{{ getErrorMessage('telefono') }}</div>
+            
+          </div>
+
+        </div>
+
+        <div class="doble">
+
+          <div>
+            <label>Edad</label>
+
+            <input
+              id="edad"
+              type="number"
+              placeholder="Ingrese edad"
+              formControlName="edad"
+              [attr.aria-invalid]="isInvalid('edad')"
+              [attr.aria-describedby]="isInvalid('edad') ? 'error-edad' : null"
+              [class.invalid]="isInvalid('edad')"
+              [class.valid]="isValid('edad')">
+
+            <div id="error-edad" class="error" *ngIf="isInvalid('edad')">{{ getErrorMessage('edad') }}</div>
+            
+          </div>
+
+          <div>
+            <label>Código</label>
+
+            <input
+              id="codigo"
+              type="text"
+              placeholder="Ingrese código"
+              formControlName="codigo"
+              [attr.aria-invalid]="isInvalid('codigo')"
+              [attr.aria-describedby]="isInvalid('codigo') ? 'error-codigo' : null"
+              [class.invalid]="isInvalid('codigo')"
+              [class.valid]="isValid('codigo')">
+
+            <div id="error-codigo" class="error" *ngIf="isInvalid('codigo')">{{ getErrorMessage('codigo') }}</div>
+            
+          </div>
+
+        </div>
+
+        <!-- BOTÓN -->
+        <div class="acciones-form">
+
+          <button
+            type="button"
+            class="btn-next"
+            (click)="irPaso2()"
+            [disabled]="!validarPaso1()">
+
+            Siguiente ➜
+
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- PASO 2 -->
+      <div *ngIf="paso === 2">
+
+        <div class="grupo-inputs">
+
+          <div>
+            <label>Carrera</label>
+
+            <select id="carrera" formControlName="carrera" [attr.aria-invalid]="isInvalid('carrera')" [attr.aria-describedby]="isInvalid('carrera') ? 'error-carrera' : null" [class.invalid]="isInvalid('carrera')" [class.valid]="isValid('carrera')">
+
+              <option value="">
+                Seleccione carrera
+              </option>
+
+              <option>
+                Ingeniería de Sistemas
+              </option>
+
+              <option>
+                Diseño Gráfico
+              </option>
+
+              <option>
+                Marketing
+              </option>
+
+              <option>
+                Administración
+              </option>
+
+            </select>
+
+            <div id="error-carrera" class="error" *ngIf="isInvalid('carrera')">{{ getErrorMessage('carrera') }}</div>
+            
+          </div>
+
+          <div>
+            <label>Género</label>
+
+            <select formControlName="genero">
+
+              <option value="">
+                Seleccione género
+              </option>
+
+              <option>
+                Masculino
+              </option>
+
+              <option>
+                Femenino
+              </option>
+
+            </select>
+          </div>
+
+        </div>
+
+        <div>
+          <label>Fecha de Nacimiento</label>
+
+          <input
+            type="date"
+            formControlName="fechaNacimiento">
+        </div>
+
+        <div>
+          <label>Dirección</label>
+
+          <textarea
+            id="direccion"
+            placeholder="Ingrese dirección"
+            formControlName="direccion"
+            [attr.aria-invalid]="isInvalid('direccion')"
+            [attr.aria-describedby]="isInvalid('direccion') ? 'error-direccion' : null"
+            [class.invalid]="isInvalid('direccion')"
+            [class.valid]="isValid('direccion')">
+          </textarea>
+
+          <div id="error-direccion" class="error" *ngIf="isInvalid('direccion')">{{ getErrorMessage('direccion') }}</div>
+          
+        </div>
+
+        <!-- BOTONES -->
+        <div class="acciones-form">
+
+          <button
+            type="button"
+            class="btn-back"
+            (click)="paso = 1">
+
+            ⬅ Atrás
+
+          </button>
+
+          <button
+            type="submit"
+            class="btn-save"
+            [disabled]="estudianteForm.invalid">
+
+            {{
+              editando
+                ? 'Actualizar'
+                : 'Guardar'
+            }}
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+  <!-- TABLA -->
+  <div class="lista">
+
+    <h3>
+      Lista de Estudiantes
+    </h3>
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Carrera</th>
+            <th>Acciones</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr
+            *ngFor="
+              let estudiante of estudiantes;
+              let i = index
+            ">
+
+            <td>
+              {{ estudiante.nombre }}
+              {{ estudiante.apellido }}
+            </td>
+
+            <td>{{ estudiante.correo }}</td>
+
+            <td>{{ estudiante.carrera }}</td>
+
+            <td class="acciones-tabla">
+
+              <button
+                class="btn-details"
+                (click)="estudianteSeleccionado = estudiante">
+
+                Ver Detalles
+
+              </button>
+
+              <button
+                class="btn-edit"
+                (click)="editarEstudiante(estudiante, i)">
+
+                Editar
+
+              </button>
+
+              <button
+                class="btn-delete"
+                (click)="eliminarEstudiante(i)">
+
+                Eliminar
+
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div
+  class="modal"
+  *ngIf="estudianteSeleccionado">
+
+  <div class="modal-content">
+
+    <h2>
+      Información del Estudiante
+    </h2>
+
+    <p>
+      <strong>Nombre:</strong>
+      {{ estudianteSeleccionado.nombre }}
+      {{ estudianteSeleccionado.apellido }}
+    </p>
+
+    <p>
+      <strong>Correo:</strong>
+      {{ estudianteSeleccionado.correo }}
+    </p>
+
+    <p>
+      <strong>Teléfono:</strong>
+      {{ estudianteSeleccionado.telefono }}
+    </p>
+
+    <p>
+      <strong>Edad:</strong>
+      {{ estudianteSeleccionado.edad }}
+    </p>
+
+    <p>
+      <strong>Carrera:</strong>
+      {{ estudianteSeleccionado.carrera }}
+    </p>
+
+    <p>
+      <strong>Código:</strong>
+      {{ estudianteSeleccionado.codigo }}
+    </p>
+
+    <p>
+      <strong>Fecha:</strong>
+      {{ estudianteSeleccionado.fechaNacimiento }}
+    </p>
+
+    <p>
+      <strong>Género:</strong>
+      {{ estudianteSeleccionado.genero }}
+    </p>
+
+    <p>
+      <strong>Dirección:</strong>
+      {{ estudianteSeleccionado.direccion }}
+    </p>
+
+    <button
+      class="btn-close"
+      (click)="estudianteSeleccionado = null">
+
+      Cerrar
+
+    </button>
+
+  </div>
+
+</div>

@@ -1,0 +1,66 @@
+<section class="listado-shell">
+  <div class="topbar">
+    <div>
+      <p class="eyebrow">Historial</p>
+      <h1>Listado de ventas</h1>
+      <p class="subtitle">Visualice clientes, fecha, total y cantidad de productos registrados en la API.</p>
+    </div>
+
+    <button type="button" class="primary" (click)="loadSales()">Actualizar</button>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span>Ventas visibles</span>
+      <strong>{{ getSalesCount() }}</strong>
+    </div>
+    <div class="stat-card accent">
+      <span>Total acumulado</span>
+      <strong>{{ getSalesTotal() | number:'1.2-2' }}</strong>
+    </div>
+    <div class="stat-card muted">
+      <span>Ventas cargadas</span>
+      <strong>{{ sales.length }}</strong>
+    </div>
+  </div>
+
+  <div class="filters">
+    <input type="text" [(ngModel)]="searchTerm" (input)="applyFilters()" placeholder="Buscar por cliente o fecha">
+    <select [(ngModel)]="sortBy" (change)="applyFilters()">
+      <option value="date">Ordenar por fecha</option>
+      <option value="total">Ordenar por total</option>
+    </select>
+  </div>
+
+  <div class="feedback error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  <div class="feedback info" *ngIf="loading">Cargando ventas...</div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Fecha</th>
+          <th>Total</th>
+          <th>Cantidad de productos</th>
+          <th>Productos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sale of filteredSales">
+          <td>
+            <div class="cell-main">{{ sale.clientName }}</div>
+            <div class="cell-sub">ID {{ sale.clientId }}</div>
+          </td>
+          <td>{{ sale.saleDate }}</td>
+          <td class="money">{{ sale.total | number:'1.2-2' }}</td>
+          <td><span class="badge">{{ getProductsCount(sale) }}</span></td>
+          <td>{{ getItemsLabel(sale) }}</td>
+        </tr>
+        <tr *ngIf="!loading && filteredSales.length === 0">
+          <td colspan="5" class="empty-state">No hay ventas registradas.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

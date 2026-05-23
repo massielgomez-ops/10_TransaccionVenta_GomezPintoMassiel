@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=StudentCRUD;encrypt=true;trustServerCertificate=true
+    username: sa
+    password: Massiel12345!
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8080

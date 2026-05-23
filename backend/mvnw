@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+# Lightweight Maven wrapper that delegates to a locally installed mvn.
+# This keeps the repository structure consistent even when the full wrapper JAR is not present.
+
+if command -v mvn >/dev/null 2>&1; then
+  exec mvn "$@"
+fi
+
+echo "mvn was not found on PATH. Please install Maven or use mvnw.cmd on Windows with Maven available." >&2
+exit 1

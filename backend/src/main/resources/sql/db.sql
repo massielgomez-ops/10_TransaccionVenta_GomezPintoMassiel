@@ -1,0 +1,60 @@
+CREATE DATABASE StudentCRUD;
+GO
+
+USE StudentCRUD;
+GO
+
+CREATE TABLE dbo.students (
+  id BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+  nombre NVARCHAR(100) NOT NULL,
+  apellido NVARCHAR(100) NOT NULL,
+  correo NVARCHAR(150) NOT NULL,
+  telefono NVARCHAR(9) NOT NULL,
+  edad INT NOT NULL,
+  carrera NVARCHAR(120) NOT NULL,
+  codigo NVARCHAR(30) NOT NULL,
+  direccion NVARCHAR(255) NOT NULL
+);
+GO
+
+CREATE TABLE dbo.customers (
+  id BIGINT NOT NULL PRIMARY KEY,
+  name NVARCHAR(120) NOT NULL,
+  document NVARCHAR(30) NOT NULL,
+  email NVARCHAR(150) NULL,
+  phone NVARCHAR(20) NULL
+);
+GO
+
+CREATE TABLE dbo.products (
+  id BIGINT NOT NULL PRIMARY KEY,
+  name NVARCHAR(120) NOT NULL,
+  sku NVARCHAR(40) NOT NULL,
+  category NVARCHAR(80) NOT NULL,
+  price DECIMAL(18,2) NOT NULL,
+  stock INT NOT NULL,
+  description NVARCHAR(255) NULL
+);
+GO
+
+CREATE TABLE dbo.sales (
+  id BIGINT NOT NULL PRIMARY KEY,
+  client_id BIGINT NOT NULL,
+  client_name NVARCHAR(120) NOT NULL,
+  sale_date NVARCHAR(20) NOT NULL,
+  total DECIMAL(18,2) NOT NULL,
+  created_at NVARCHAR(50) NOT NULL
+);
+GO
+
+CREATE TABLE dbo.sale_items (
+  id BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+  sale_id BIGINT NOT NULL,
+  product_id BIGINT NOT NULL,
+  product_name NVARCHAR(120) NOT NULL,
+  quantity INT NOT NULL,
+  unit_price DECIMAL(18,2) NOT NULL,
+  subtotal DECIMAL(18,2) NOT NULL,
+  stock INT NOT NULL
+);
+GO

@@ -1,0 +1,36 @@
+<div class="ventas-panel">
+  <div class="header">
+    <h1>Ventas</h1>
+    <p>Desde aquí puedes registrar una venta o revisar el listado.</p>
+  </div>
+
+  <div class="cards">
+    <button type="button" class="card" (click)="openRegistro()">
+      <span>🧾</span>
+      <h3>Registro de ventas</h3>
+      <p>Crear una nueva venta con cliente y productos.</p>
+    </button>
+
+    <button type="button" class="card" (click)="openListado()">
+      <span>📋</span>
+      <h3>Ventas</h3>
+      <p>Ver el listado de ventas registradas.</p>
+    </button>
+  </div>
+
+  <div class="inline-views">
+    <div *ngIf="showRegistro" class="inline-panel">
+      <app-registro-venta></app-registro-venta>
+      <div class="inline-close">
+        <button class="secondary" (click)="closeAll()">Cerrar</button>
+      </div>
+    </div>
+
+    <div *ngIf="showListado" class="inline-panel">
+      <app-listado-ventas></app-listado-ventas>
+      <div class="inline-close">
+        <button class="secondary" (click)="closeAll()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
